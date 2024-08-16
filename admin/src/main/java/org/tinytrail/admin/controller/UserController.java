@@ -17,6 +17,7 @@ public class UserController {
 
     /**
      * 查询用户信息(脱敏)
+     * get请求
      */
     @GetMapping("api/tiny-trail/v1/user/{username}")
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username) {

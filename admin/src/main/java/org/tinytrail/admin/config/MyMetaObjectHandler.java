@@ -8,8 +8,7 @@ import java.util.Date;
 
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
-
-
+    
     @Override
     public void insertFill(MetaObject metaObject) {
         strictInsertFill(metaObject, "createTime", Date::new, Date.class);
