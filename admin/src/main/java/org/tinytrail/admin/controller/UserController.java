@@ -1,11 +1,12 @@
 package org.tinytrail.admin.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.tinytrail.admin.common.convention.result.Result;
 import org.tinytrail.admin.common.convention.result.Results;
-import org.tinytrail.admin.common.enums.UserErrorCodeEnum;
 import org.tinytrail.admin.dto.req.UserRegisterReqDTO;
+import org.tinytrail.admin.dto.resp.UserActualRespDTO;
 import org.tinytrail.admin.dto.resp.UserRespDTO;
 import org.tinytrail.admin.service.UserService;
 
@@ -17,17 +18,21 @@ public class UserController {
 
     /**
      * 查询用户信息(脱敏)
-     * get请求
      */
     @GetMapping("api/tiny-trail/v1/user/{username}")
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username) {
-        UserRespDTO result = userService.getUserByUsername(username);
-        if (result == null) {
-            System.out.println("null...");
-            return new Result<UserRespDTO>().setCode(UserErrorCodeEnum.USER_NULL.code()).setMessage(UserErrorCodeEnum.USER_NULL.message());
-        }
-        return Results.success(result);
+        return Results.success(userService.getUserByUsername(username));
     }
+
+    /**
+     * 查询用户信息(不脱敏)
+     */
+    @GetMapping("api/tiny-trail/v1/actual/user/{username}")
+    public Result<UserActualRespDTO> getActualUserByUsername(@PathVariable("username") String username) {
+        // 使用BeanUtil 包一层返回就不会脱敏了
+        return Results.success(BeanUtil.toBean(userService.getUserByUsername(username), UserActualRespDTO.class));
+    }
+
 
     /**
      * 查询用户名是否存在
@@ -41,8 +46,8 @@ public class UserController {
      * 新增用户
      */
     @PostMapping("api/tiny-trail/v1/user")
-    public Result<Void> register(@RequestBody UserRegisterReqDTO registerParam) {
-        userService.register(registerParam);
+    public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam) {
+        userService.register(requestParam);
         return Results.success();
     }
 
