@@ -1,6 +1,5 @@
 package org.tinytrail.admin.service;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.tinytrail.admin.dao.entity.UserDO;
 import org.tinytrail.admin.dto.req.UserLoginReqDTO;

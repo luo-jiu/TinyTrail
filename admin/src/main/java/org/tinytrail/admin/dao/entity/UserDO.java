@@ -1,12 +1,8 @@
 package org.tinytrail.admin.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.tinytrail.admin.database.BaseDO;
-
-import java.util.Date;
 
 /**
  * 用户持久层实体

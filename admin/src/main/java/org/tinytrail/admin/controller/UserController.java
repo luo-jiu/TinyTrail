@@ -36,7 +36,6 @@ public class UserController {
         return Results.success(BeanUtil.toBean(userService.getUserByUsername(username), UserActualRespDTO.class));
     }
 
-
     /**
      * 查询用户名是否存在
      */
