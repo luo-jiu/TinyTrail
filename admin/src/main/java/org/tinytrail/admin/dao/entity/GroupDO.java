@@ -19,23 +19,28 @@ import org.tinytrail.admin.database.BaseDO;
 public class GroupDO extends BaseDO {
 
     /**
-     * ID - 自增主键
+     * 自增主键
      */
     private Long id;
 
     /**
-     * gId - 分组标识
+     * 分组标识
      */
     private String gid;
 
     /**
-     * 组名 - 分组名称
+     * 分组名称
      */
     private String name;
 
     /**
-     * 创建人 - 创建分组用户名
+     * 创建分组用户名
      */
     private String username;
+
+    /**
+     * 分组排序
+     */
+    private Integer sortOrder;
 
 }
