@@ -1,18 +1,22 @@
 package org.tinytrail.admin.dao.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.tinytrail.admin.database.BaseDO;
 
-import java.util.Date;
 
 /**
  * 短链接分组实体
  */
 @Data
 @TableName("t_group")
-public class GroupDO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GroupDO extends BaseDO {
 
     /**
      * ID - 自增主键
@@ -22,7 +26,7 @@ public class GroupDO {
     /**
      * gId - 分组标识
      */
-    private Long gid;
+    private String gid;
 
     /**
      * 组名 - 分组名称
@@ -34,26 +38,4 @@ public class GroupDO {
      */
     private String username;
 
-    /**
-     * 注销时间 - 用户账户的注销时间
-     */
-    private Long deletionTime;
-
-    /**
-     * 创建时间 - 记录创建时间
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Date createTime;
-
-    /**
-     * 修改时间 - 记录的最后修改时间
-     */
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
-
-    /**
-     * 逻辑删除标志 - 逻辑删除标志(1:删除, 0:未删除)
-     */
-    @TableField(fill = FieldFill.INSERT)
-    private Integer delFlag;
 }
