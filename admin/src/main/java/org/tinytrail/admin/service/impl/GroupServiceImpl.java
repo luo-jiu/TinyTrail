@@ -2,6 +2,7 @@ package org.tinytrail.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import groovy.util.logging.Slf4j;
@@ -10,6 +11,7 @@ import org.tinytrail.admin.common.biz.user.UserContext;
 import org.tinytrail.admin.dao.entity.GroupDO;
 import org.tinytrail.admin.dao.mapper.GroupMapper;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSaveReqDTO;
+import org.tinytrail.admin.dto.req.TinyTrailGroupUpdateReqDTO;
 import org.tinytrail.admin.service.GroupService;
 import org.tinytrail.admin.toolkit.RandomGenerator;
 
@@ -48,6 +50,17 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
                 .orderByDesc(GroupDO::getSortOrder, GroupDO::getUpdateTime);
         List<GroupDO> groupDOS = baseMapper.selectList(queryWrapper);
         return BeanUtil.copyToList(groupDOS, TinyTrailGroupSaveReqDTO.class);
+    }
+
+    @Override
+    public void updateGroup(TinyTrailGroupUpdateReqDTO requestParam) {
+        LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                .eq(GroupDO::getDelFlag, 0)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getGid, requestParam.getGid());
+        GroupDO groupDO = new GroupDO();
+        groupDO.setName(requestParam.getName());
+        baseMapper.update(groupDO, updateWrapper);
     }
 
     private boolean hasGid(String gid) {

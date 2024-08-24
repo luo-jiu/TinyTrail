@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class UserTransmitFilter implements Filter {
@@ -22,6 +23,10 @@ public class UserTransmitFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         String username = httpServletRequest.getHeader("username");
         String token = httpServletRequest.getHeader("token");
+
+        // TODO 未来将这部分移到网关
+        String requestURI = httpServletRequest.getRequestURI();
+        if (Objects.equals(requestURI, "/api/tiny-trail/v1/login")) return;
 
         if (username != null && token != null) {
             Object userInfoJsonStr = stringRedisTemplate.opsForHash().get("login_" + username, token);
