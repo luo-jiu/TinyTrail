@@ -2,7 +2,7 @@ package org.tinytrail.admin.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.tinytrail.admin.database.BaseDO;
+import org.tinytrail.admin.common.database.BaseDO;
 
 /**
  * 用户持久层实体

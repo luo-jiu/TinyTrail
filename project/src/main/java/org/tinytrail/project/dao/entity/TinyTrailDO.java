@@ -1,7 +1,12 @@
 package org.tinytrail.project.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.tinytrail.project.common.database.BaseDO;
 
 import java.util.Date;
 
@@ -9,8 +14,11 @@ import java.util.Date;
  * 短链接实体
  */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("t_link")
-public class TinyLinkDO {
+public class TinyTrailDO extends BaseDO {
 
     /**
      * id
@@ -70,22 +78,7 @@ public class TinyLinkDO {
     /**
      * 描述
      */
+    @TableField("`describe`")
     private String describe;
-
-    /**
-     * 创建时间
-     */
-    private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    private Date updateTime;
-
-    /**
-     * 删除标识(1:删除，0:未删除)
-     */
-    private int delFlag;
-
 
 }

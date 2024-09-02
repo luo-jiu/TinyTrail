@@ -5,14 +5,15 @@ dataSources:
     driverClassName: com.mysql.cj.jdbc.Driver
     jdbcUrl: jdbc:mysql://127.0.0.1:3306/tinytrail?useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true&allowMultiQueries=true&serverTimezone=Asia/Shanghai
     username: root
-    password: miki5nn.zpy394
+    password: 123456
 
 rules:
   - !SHARDING
     tables:
-      t_user:
+      t_link:
         # 真实数据节点，比如数据库源以及数据库在数据库中真实存在的
-        actualDataNodes: ds_0.t_user_${0..15}
+#        actualDataNodes: ds_0.t_user_${0..15}
+        actualDataNodes: ds_0.t_user_0
         # 分表策略
         tableStrategy:
           # 用于单分片键的标准分片场景

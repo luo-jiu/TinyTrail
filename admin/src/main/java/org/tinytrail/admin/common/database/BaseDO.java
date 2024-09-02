@@ -1,4 +1,4 @@
-package org.tinytrail.admin.database;
+package org.tinytrail.admin.common.database;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;

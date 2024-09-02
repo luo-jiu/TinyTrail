@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.tinytrail.admin.database.BaseDO;
+import org.tinytrail.admin.common.database.BaseDO;
 
 /**
  * 短链接分组实体
