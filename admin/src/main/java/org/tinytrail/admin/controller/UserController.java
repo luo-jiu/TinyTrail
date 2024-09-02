@@ -22,7 +22,7 @@ public class UserController {
     /**
      * 查询用户信息(脱敏)
      */
-    @GetMapping("/api/tiny-trail/v1/user/{username}")
+    @GetMapping("/api/tiny-trail/admin/v1/user/{username}")
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username) {
         return Results.success(userService.getUserByUsername(username));
     }
@@ -30,7 +30,7 @@ public class UserController {
     /**
      * 查询用户信息(不脱敏)
      */
-    @GetMapping("/api/tiny-trail/v1/actual/user/{username}")
+    @GetMapping("/api/tiny-trail/admin/v1/actual/user/{username}")
     public Result<UserActualRespDTO> getActualUserByUsername(@PathVariable("username") String username) {
         // 使用BeanUtil 包一层返回就不会脱敏了
         return Results.success(BeanUtil.toBean(userService.getUserByUsername(username), UserActualRespDTO.class));
@@ -39,7 +39,7 @@ public class UserController {
     /**
      * 查询用户名是否存在
      */
-    @GetMapping("/api/tiny-trail/v1/user/has-username")
+    @GetMapping("/api/tiny-trail/admin/v1/user/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") String username) {
         return Results.success(userService.hasUsername(username));
     }
@@ -47,7 +47,7 @@ public class UserController {
     /**
      * 新增用户
      */
-    @PostMapping("/api/tiny-trail/v1/user")
+    @PostMapping("/api/tiny-trail/admin/v1/user")
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam) {
         userService.register(requestParam);
         return Results.success();
@@ -56,7 +56,7 @@ public class UserController {
     /**
      * 修改用户
      */
-    @PutMapping("/api/tiny-trail/v1/user")
+    @PutMapping("/api/tiny-trail/admin/v1/user")
     public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam) {
         userService.update(requestParam);
         return Results.success();
@@ -65,7 +65,7 @@ public class UserController {
     /**
      * 用户登录
      */
-    @PostMapping("/api/tiny-trail/v1/login")
+    @PostMapping("/api/tiny-trail/admin/v1/login")
     public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
         return Results.success(userService.login(requestParam));
     }

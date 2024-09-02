@@ -23,7 +23,7 @@ public class GroupController {
     /**
      * 新增短链接分组
      */
-    @PostMapping("/api/tiny-trail/v1/group")
+    @PostMapping("/api/tiny-trail/admin/v1/group")
     public Result<Void> save(@RequestBody TinyTrailGroupSaveReqDTO requestParam) {
         groupService.saveGroup(requestParam.getName());
         return Results.success();
@@ -32,7 +32,7 @@ public class GroupController {
     /**
      * 查询分组集合
      */
-    @GetMapping("/api/tiny-trail/v1/group")
+    @GetMapping("/api/tiny-trail/admin/v1/group")
     public Result<List<TinyTrailGroupSaveReqDTO>> listGroup() {
         return Results.success(groupService.listGroup());
     }
@@ -40,7 +40,7 @@ public class GroupController {
     /**
      * 修改短链接分组
      */
-    @PutMapping("/api/tiny-trail/v1/group")
+    @PutMapping("/api/tiny-trail/admin/v1/group")
     public Result<Void> updateGroup(@RequestBody TinyTrailGroupUpdateReqDTO requestParam) {
         groupService.updateGroup(requestParam);
         return Results.success();
@@ -49,7 +49,7 @@ public class GroupController {
     /**
      * 删除短链接分组
      */
-    @DeleteMapping("/api/tiny-trail/v1/group")
+    @DeleteMapping("/api/tiny-trail/admin/v1/group")
     public Result<Void> deleteGroup(@RequestParam String gid) {
         groupService.deleteGroup(gid);
         return Results.success();
@@ -58,7 +58,7 @@ public class GroupController {
     /**
      * 排序短连接分组
      */
-    @PostMapping("/api/tiny-trail/v1/group/sort")
+    @PostMapping("/api/tiny-trail/admin/v1/group/sort")
     public Result<Void> sortGroup(@RequestBody List<TinyTrailGroupSortReqDTO> requestParam) {
         groupService.sortGroup(requestParam);
         return Results.success();
