@@ -2,6 +2,7 @@ package org.tinytrail.project.service.impl;
 
 import cn.hutool.core.text.StrBuilder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +14,9 @@ import org.tinytrail.project.common.convention.exception.ServiceException;
 import org.tinytrail.project.dao.entity.TinyTrailDO;
 import org.tinytrail.project.dao.mapper.TinyTrailMapper;
 import org.tinytrail.project.dto.req.TinyTrailCreateReqDTO;
+import org.tinytrail.project.dto.req.TinyTrailPageReqDTO;
 import org.tinytrail.project.dto.resp.TinyTrailCreateRespDTO;
+import org.tinytrail.project.dto.resp.TinyTrailPageRespDTO;
 import org.tinytrail.project.service.TinyTrailService;
 import org.tinytrail.project.toolkit.HashUtil;
 
@@ -64,6 +67,16 @@ public class TinyTrailServiceImpl extends ServiceImpl<TinyTrailMapper, TinyTrail
                 .originUrl(requestParam.getOriginUrl())
                 .gid(requestParam.getGid())
                 .build();
+    }
+
+    @Override
+    public IPage<TinyTrailPageRespDTO> pageTinyTrail(TinyTrailPageReqDTO requestParam) {
+        LambdaQueryWrapper<TinyTrailDO> queryWrapper = Wrappers.lambdaQuery(TinyTrailDO.class)
+                .eq(TinyTrailDO::getGid, requestParam.getGid())
+                .eq(TinyTrailDO::getEnableStatus, 0)
+                .eq(TinyTrailDO::getDelFlag, 0);
+        IPage<TinyTrailDO> tinyTrailDOIPage = baseMapper.selectPage(requestParam, queryWrapper);
+        return null;
     }
 
     private String generateSuffix(TinyTrailCreateReqDTO requestParam) {

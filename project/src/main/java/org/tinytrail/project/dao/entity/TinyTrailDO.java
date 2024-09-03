@@ -56,6 +56,11 @@ public class TinyTrailDO extends BaseDO {
     private Integer clickNum;
 
     /**
+     * 网页图标
+     */
+    private String favicon;
+
+    /**
      * 启用标识 0:启用 1:未启用
      */
     private int enableStatus;
