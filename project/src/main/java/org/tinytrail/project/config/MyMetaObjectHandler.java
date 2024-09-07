@@ -1,4 +1,4 @@
-package org.tinytrail.project.common.config;
+package org.tinytrail.project.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

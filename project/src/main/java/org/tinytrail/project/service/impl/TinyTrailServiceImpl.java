@@ -1,5 +1,6 @@
 package org.tinytrail.project.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.StrBuilder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -74,9 +75,10 @@ public class TinyTrailServiceImpl extends ServiceImpl<TinyTrailMapper, TinyTrail
         LambdaQueryWrapper<TinyTrailDO> queryWrapper = Wrappers.lambdaQuery(TinyTrailDO.class)
                 .eq(TinyTrailDO::getGid, requestParam.getGid())
                 .eq(TinyTrailDO::getEnableStatus, 0)
-                .eq(TinyTrailDO::getDelFlag, 0);
+                .eq(TinyTrailDO::getDelFlag, 0)
+                .orderByDesc(TinyTrailDO::getCreateTime);
         IPage<TinyTrailDO> tinyTrailDOIPage = baseMapper.selectPage(requestParam, queryWrapper);
-        return null;
+        return tinyTrailDOIPage.convert(each -> BeanUtil.toBean(each, TinyTrailPageRespDTO.class));
     }
 
     private String generateSuffix(TinyTrailCreateReqDTO requestParam) {

@@ -1,4 +1,4 @@
-package org.tinytrail.project.common.config;
+package org.tinytrail.project.config;
 
 import org.redisson.api.RBloomFilter;
 import org.redisson.api.RedissonClient;

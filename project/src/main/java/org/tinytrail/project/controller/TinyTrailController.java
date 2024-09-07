@@ -31,6 +31,9 @@ public class TinyTrailController {
         return Results.success(tinyTrailService.createTinyTrail(requestParam));
     }
 
+    /**
+     * 分页查询短链接
+     */
     @GetMapping("/api/tiny-trail/v1/page")
     public Result<IPage<TinyTrailPageRespDTO>> pageTinyTrail(TinyTrailPageReqDTO requestParam) {
         return Results.success(tinyTrailService.pageTinyTrail(requestParam));
