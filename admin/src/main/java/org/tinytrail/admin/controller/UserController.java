@@ -65,7 +65,7 @@ public class UserController {
     /**
      * 用户登录
      */
-    @PostMapping("/api/tiny-trail/admin/v1/login")
+    @PostMapping("/api/tiny-trail/admin/v1/user/login")
     public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
         return Results.success(userService.login(requestParam));
     }
@@ -73,7 +73,7 @@ public class UserController {
     /**
      * 检查用户是否登录
      */
-    @GetMapping("/api/tiny-trail/v1/check-login")
+    @GetMapping("/api/tiny-trail/admin/v1/user/check-login")
     public Result<Boolean> checkLogin(@RequestParam("username") String username, @RequestParam("token") String token) {
         return Results.success(userService.checkLogin(username, token));
     }
@@ -81,7 +81,7 @@ public class UserController {
     /**
      * 用户推出登录
      */
-    @DeleteMapping("/api/tiny-trail/v1/logout")
+    @DeleteMapping("/api/tiny-trail/admin/v1/user/logout")
     public Result<Void> logout(@RequestParam("username") String username, @RequestParam("token") String token) {
         userService.logout(username, token);
         return Results.success();

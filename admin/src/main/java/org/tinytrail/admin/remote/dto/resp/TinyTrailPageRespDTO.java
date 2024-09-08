@@ -1,9 +1,8 @@
-package org.tinytrail.project.dto.resp;
+package org.tinytrail.admin.remote.dto.resp;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.tinytrail.project.dao.entity.TinyTrailDO;
 
 import java.util.Date;
 
@@ -11,7 +10,7 @@ import java.util.Date;
  * 短连接分页返回参数
  */
 @Data
-public class TinyTrailPageRespDTO extends Page<TinyTrailDO>{
+public class TinyTrailPageRespDTO extends Page {
 
     /**
      * id
