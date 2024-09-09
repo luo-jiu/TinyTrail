@@ -13,6 +13,7 @@ import org.tinytrail.admin.dao.mapper.GroupMapper;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSaveReqDTO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSortReqDTO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupUpdateReqDTO;
+import org.tinytrail.admin.dto.resp.TinyTrailGroupRespDTO;
 import org.tinytrail.admin.service.GroupService;
 import org.tinytrail.admin.toolkit.RandomGenerator;
 
@@ -44,13 +45,13 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
     }
 
     @Override
-    public List<TinyTrailGroupSaveReqDTO> listGroup() {
+    public List<TinyTrailGroupRespDTO> listGroup() {
         LambdaQueryWrapper<GroupDO> queryWrapper = Wrappers.lambdaQuery(GroupDO.class)
                 .eq(GroupDO::getDelFlag, 0)
                 .eq(GroupDO::getUsername, UserContext.getUsername())
                 .orderByDesc(GroupDO::getSortOrder, GroupDO::getUpdateTime);
         List<GroupDO> groupDOS = baseMapper.selectList(queryWrapper);
-        return BeanUtil.copyToList(groupDOS, TinyTrailGroupSaveReqDTO.class);
+        return BeanUtil.copyToList(groupDOS, TinyTrailGroupRespDTO.class);
     }
 
     @Override

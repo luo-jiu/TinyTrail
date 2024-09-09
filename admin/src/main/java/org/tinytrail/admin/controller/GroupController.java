@@ -7,6 +7,7 @@ import org.tinytrail.admin.common.convention.result.Results;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSaveReqDTO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSortReqDTO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupUpdateReqDTO;
+import org.tinytrail.admin.dto.resp.TinyTrailGroupRespDTO;
 import org.tinytrail.admin.service.GroupService;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class GroupController {
      * 查询分组集合
      */
     @GetMapping("/api/tiny-trail/admin/v1/group")
-    public Result<List<TinyTrailGroupSaveReqDTO>> listGroup() {
+    public Result<List<TinyTrailGroupRespDTO>> listGroup() {
         return Results.success(groupService.listGroup());
     }
 

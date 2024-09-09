@@ -5,6 +5,7 @@ import org.tinytrail.admin.dao.entity.GroupDO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSaveReqDTO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupSortReqDTO;
 import org.tinytrail.admin.dto.req.TinyTrailGroupUpdateReqDTO;
+import org.tinytrail.admin.dto.resp.TinyTrailGroupRespDTO;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface GroupService extends IService<GroupDO> {
      * 获取短链接分组集合
      * @return 短链接集合
      */
-    List<TinyTrailGroupSaveReqDTO> listGroup();
+    List<TinyTrailGroupRespDTO> listGroup();
 
     /**
      * 修改短链接分组
