@@ -22,4 +22,9 @@ public class TinyTrailGroupRespDTO {
      * 分组排序
      */
     private Integer sortOrder;
+
+    /**
+     * 短连接数量
+     */
+    private Integer tinyTrailCount;
 }

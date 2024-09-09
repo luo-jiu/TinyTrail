@@ -3,6 +3,7 @@ package org.tinytrail.project.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.StrBuilder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -17,9 +18,14 @@ import org.tinytrail.project.dao.mapper.TinyTrailMapper;
 import org.tinytrail.project.dto.req.TinyTrailCreateReqDTO;
 import org.tinytrail.project.dto.req.TinyTrailPageReqDTO;
 import org.tinytrail.project.dto.resp.TinyTrailCreateRespDTO;
+import org.tinytrail.project.dto.resp.TinyTrailGroupCountQueryRespDTO;
 import org.tinytrail.project.dto.resp.TinyTrailPageRespDTO;
 import org.tinytrail.project.service.TinyTrailService;
 import org.tinytrail.project.toolkit.HashUtil;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * 短链接接口实现层
@@ -30,6 +36,7 @@ import org.tinytrail.project.toolkit.HashUtil;
 public class TinyTrailServiceImpl extends ServiceImpl<TinyTrailMapper, TinyTrailDO> implements TinyTrailService {
 
     private final RBloomFilter<String> tinyUriCreateCachePenetrationBloomFilter;
+    private final TinyTrailMapper tinyTrailMapper;
 
     @Override
     public TinyTrailCreateRespDTO createTinyTrail(TinyTrailCreateReqDTO requestParam) {
@@ -79,6 +86,17 @@ public class TinyTrailServiceImpl extends ServiceImpl<TinyTrailMapper, TinyTrail
                 .orderByDesc(TinyTrailDO::getCreateTime);
         IPage<TinyTrailDO> tinyTrailDOIPage = baseMapper.selectPage(requestParam, queryWrapper);
         return tinyTrailDOIPage.convert(each -> BeanUtil.toBean(each, TinyTrailPageRespDTO.class));
+    }
+
+    @Override
+    public List<TinyTrailGroupCountQueryRespDTO> listGroupTinyTrailCount(List<String> requestParam) {
+        QueryWrapper<TinyTrailDO> queryWrapper = Wrappers.query(new TinyTrailDO())
+                .select("gid as gid, count(*) as tinyTrailCount")
+                .in("gid", requestParam)
+                .eq("enable_status", 0)
+                .groupBy("gid");
+        List<Map<String, Object>> tinyTrailDOList = baseMapper.selectMaps(queryWrapper);
+        return BeanUtil.copyToList(tinyTrailDOList, TinyTrailGroupCountQueryRespDTO.class);
     }
 
     private String generateSuffix(TinyTrailCreateReqDTO requestParam) {
